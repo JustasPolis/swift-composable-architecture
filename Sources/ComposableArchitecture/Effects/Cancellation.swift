@@ -304,7 +304,7 @@ extension Task where Success == Never, Failure == Never {
 }
 
 @_spi(Internals) public struct _CancelID: Hashable {
-  let id: AnyHashable
+  public let id: AnyHashable
   let discriminator: ObjectIdentifier
 
   public init(id: AnyHashable) {
@@ -337,7 +337,7 @@ extension Result: _ErrorMechanism {}
 
 @_spi(Internals)
 public class CancellablesCollection {
-  var storage: [_CancelID: Set<AnyCancellable>] = [:]
+  private(set) public var storage: [_CancelID: Set<AnyCancellable>] = [:]
 
   func insert(
     _ cancellable: AnyCancellable,
